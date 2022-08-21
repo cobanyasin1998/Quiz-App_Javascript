@@ -4,6 +4,7 @@ const ui = new UI();
 ui.btn_start.addEventListener("click", function () {
   ui.quiz_box.classList.add("active");
   startTimer(10);
+  startTimeLine();
   soruGoster(quiz.soruGetir());
   soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
   ui.btn_next.classList.remove("show");
@@ -15,12 +16,13 @@ ui.btn_next.addEventListener("click", function () {
     quiz.soruIndex += 1;
     clearInterval(counter);
     startTimer(10);
-  
+
     soruGoster(quiz.soruGetir());
     soruSayisiniGoster(quiz.soruIndex + 1, quiz.sorular.length);
     ui.btn_next.classList.remove("show");
   } else {
     clearInterval(counter);
+    clearInterval(counterLine);
 
     ui.score_box.classList.add("active");
     ui.quiz_box.classList.remove("active");
@@ -98,18 +100,32 @@ function startTimer(time) {
 
       ui.time_text.textContent = "Süre Bitti";
 
-      let cevap =  quiz.soruGetir().dogruCevap;
-      
-      for(let option of ui.option_list.children){
-        if(option.querySelector("span b").textContent == cevap){
+      let cevap = quiz.soruGetir().dogruCevap;
+
+      for (let option of ui.option_list.children) {
+        if (option.querySelector("span b").textContent == cevap) {
           option.classList.add("correct");
-          option.insertAdjacentHTML("beforeend",ui.correctIcon);
+          option.insertAdjacentHTML("beforeend", ui.correctIcon);
         }
 
         option.classList.add("disabled");
       }
 
       ui.btn_next.classList.add("show");
+    }
+  }
+}
+let counterLine;
+function startTimeLine() {
+  let time = 0;
+  setInterval(timer, 100);
+
+  function timer() {
+    time += 5;
+    ui.time_line.style.width = time + "px";
+debugger;
+    if (time > 550) {
+      clearInterval(counterLine);
     }
   }
 }

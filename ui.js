@@ -6,7 +6,12 @@ function UI() {
     (this.btn_replay = document.querySelector(".btn_replay")),
     (this.btn_finish = document.querySelector(".btn_finish")),
 
-    (this.time_second = document.querySelector(".time_text")),
+    (this.time_text = document.querySelector(".time_text")),
+    (this.time_second = document.querySelector(".time_second")),
+
+
+    (this.time_line = document.querySelector(".time_line")),
+
 
     (this.score_box = document.querySelector(".score_box")),
     (this.option_list = document.querySelector(".option_list")),
